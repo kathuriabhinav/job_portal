@@ -32,6 +32,7 @@ public class admin {
         b2.setFont(font1);
 
         f.setLayout(null);
+        f.setLocationRelativeTo(null);
         f.setVisible(true);
 
         b1.addActionListener(new ActionListener(){
@@ -112,7 +113,7 @@ public class admin {
             l70.setForeground(Color.red);
             l80.setForeground(Color.red);
             l.setForeground(Color.red);
-
+            f1.setLocationRelativeTo(null);
             f1.setLayout(null);
 
             f1.add(l1);
@@ -159,6 +160,7 @@ public class admin {
                             b6.setBounds(170, 120, 200, 30);
                             f5.add(b6);
                             f5.setLayout(null);
+                            f5.setLocationRelativeTo(null);
                             f5.setVisible(true);
                             b20.addActionListener(new ActionListener(){
 
@@ -181,28 +183,29 @@ public class admin {
     private static class login_admin {
 
         public login_admin() {
+            
             JFrame f6=new JFrame("LOGIN PAGE");
-            JTextField t9=new JTextField("",45);
-
-            JLabel l10=new JLabel("ENTER EMAIL ID");
-            JLabel l100=new JLabel(" ");
+            
+            JLabel l10=new JLabel("EMAIL ID");
+            JTextField t9=new JTextField("",45);  
+            
+            JLabel l11=new JLabel("PASSWORD");
             JPasswordField t10=new JPasswordField("",30);
 
-            JLabel l11=new JLabel("ENTER PASSWORD");
+            JLabel l100=new JLabel(" ");
 
             JButton b7=new JButton("LOGIN");
 
             Font font5=new Font("Verdana",Font.BOLD,18);
 
-            f6.setSize(1400,750);
-
-            l10.setBounds(150,150,300,70);
-            l100.setBounds(1000,350,300,70);
-            t9.setBounds(480,150,600,60);
-            l11.setBounds(150,240,300,70);
-            t10.setBounds(480,240,600,70);
-            b7.setBounds(1000,600,300,60);
-
+            f6.setSize(900,700);
+            l10.setBounds(50,190,250,50);
+            t9.setBounds(350,190,470,50);
+            l11.setBounds(50,260,150,50);
+            t10.setBounds(350,260,470,50);
+            l100.setBounds(400,400,300,50);
+            b7.setBounds(400,500,250,70);
+            
             l10.setFont(font5);
             t9.setFont(font5);
             l11.setFont(font5);
@@ -216,6 +219,7 @@ public class admin {
             f6.add(t10);
             f6.add(b7);
             f6.setLayout(null);
+            f6.setLocationRelativeTo(null);
             f6.setVisible(true);
         
 	     b7.addActionListener( new ActionListener() {
@@ -224,7 +228,11 @@ public class admin {
 	        {
                     new login(t9.getText(),t10.getText(),3);
                     if(login.main(new String[0])==1) {
-                        // after login work
+                        new display_database_tables();
+                    }else{
+                        l100.setText("enter valid credentials");
+                        l100.setFont(font5);
+                        l100.setForeground(Color.red);
                     }
                 }
             });

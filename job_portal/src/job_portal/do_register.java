@@ -27,7 +27,7 @@ public class do_register {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL,USER, PASS);
             if(m==1){
-                stmt = conn.prepareStatement("INSERT INTO comapny VALUES(?,?,?,?)");
+                stmt = conn.prepareStatement("INSERT INTO company VALUES(?,?,?,?)");
             }else if(m==2){
                 stmt = conn.prepareStatement("INSERT INTO jobseeker VALUES(?,?,?,?)");
             }else if(m==3){
