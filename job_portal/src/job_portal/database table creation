@@ -1,0 +1,21 @@
+create database job_portal;
+
+use job_portal;
+
+create table company(
+email_id Varchar(40) primary key,
+person_id Varchar(13) not null,
+name Varchar(45) not null,
+contact_no Varchar(10) not null);
+
+create table jobseeker(
+email_id Varchar(40) primary key,
+person_id Varchar(13) not null,
+name Varchar(45) not null,
+contact_no Varchar(10) not null);
+
+create table admin(
+email_id Varchar(40) primary key,
+person_id Varchar(13) not null,
+name Varchar(45) not null,
+contact_no Varchar(10) not null);
