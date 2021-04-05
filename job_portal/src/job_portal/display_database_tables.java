@@ -113,7 +113,7 @@ public class display_database_tables{
             pst = conn.prepareStatement("select * from "+tablename+"");
             ResultSet rs = pst.executeQuery();
             int i = 0;
-            if (rs.next()) {
+            while (rs.next()) {
                 e = rs.getString("email_id");
                 p = rs.getString("person_id");
                 n = rs.getString("name");
