@@ -6,10 +6,12 @@
 package job_portal;
 
 import java.awt.Font;
+import library.assistant.database.database_handler;
 
 public class my_main_class 
 {
 	public static void main(String[] args) {
-		new main_menu();
+            new database_handler();
+            new main_menu();
 	}
 }
