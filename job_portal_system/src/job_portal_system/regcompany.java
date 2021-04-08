@@ -1,5 +1,15 @@
 package job_portal_system;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import javax.swing.JOptionPane;
+import static job_portal_system.regjobseeker.JDBC_DRIVER;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +21,10 @@ package job_portal_system;
  * @author ABHINAV KATHURI
  */
 public class regcompany extends javax.swing.JFrame {
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+    static final String DB_URL = "jdbc:mysql://localhost:3306/job_portal_system";
+    static final String USER = "root";
+    static final String PASS = "root";
 
     /**
      * Creates new form regcompany
@@ -40,6 +54,7 @@ public class regcompany extends javax.swing.JFrame {
         submitbutton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cminpercentage = new javax.swing.JTextField();
+        displayerrortext = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +83,11 @@ public class regcompany extends javax.swing.JFrame {
 
         submitbutton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         submitbutton.setText("Submit");
+        submitbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitbuttonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Minimum Percentage");
@@ -83,7 +103,10 @@ public class regcompany extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(displayerrortext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,12 +160,84 @@ public class regcompany extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cminpercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(displayerrortext, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
+        // TODO add your handling code here:
+        String name = cname.getText().toString();
+        String emailid = cemail.getText().toString();
+        String password = cpassword.getText().toString();
+        String contactno = ccontact.getText().toString();
+        int percentage = Integer.parseInt(cminpercentage.getText());
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("INSERT INTO company VALUES(?,?,?,?,?)");
+            stmt.setString(1,name);
+            stmt.setString(2,emailid);
+            stmt.setString(3,password);
+            stmt.setString(4,contactno);
+            stmt.setInt(5,percentage);
+            stmt.executeUpdate();
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(this,"Company Registered");
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	displayerrortext.setText("Email already registered");
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }
+    }//GEN-LAST:event_submitbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,6 +280,7 @@ public class regcompany extends javax.swing.JFrame {
     private javax.swing.JTextField cminpercentage;
     private javax.swing.JTextField cname;
     private javax.swing.JTextField cpassword;
+    private javax.swing.JLabel displayerrortext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -28,7 +28,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="submitbutton" min="-2" pref="97" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="displayerrortext" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="submitbutton" min="-2" pref="97" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" pref="189" max="-2" attributes="0"/>
@@ -100,7 +104,10 @@
                   <Component id="cminpercentage" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="submitbutton" min="-2" pref="42" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="submitbutton" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="displayerrortext" min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="76" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -182,6 +189,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitbuttonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -197,6 +207,8 @@
           <Font name="Times New Roman" size="18" style="1"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="displayerrortext">
     </Component>
   </SubComponents>
 </Form>

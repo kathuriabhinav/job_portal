@@ -49,6 +49,11 @@ public class loginadmin extends javax.swing.JFrame {
 
         submitbutton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         submitbutton.setText("Submit");
+        submitbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitbuttonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Admin Email ID");
@@ -96,6 +101,18 @@ public class loginadmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
+        // TODO add your handling code here:
+        String u = aemail.getText();
+        String p = apassword.getText();
+        if(u.equals("admin") && p.equals("admin")){
+            adminpage a = new adminpage();
+            a.setLocationRelativeTo(null);
+            a.setDefaultCloseOperation(DISPOSE_ON_CLOSE  );
+            a.setVisible(true);
+        }
+    }//GEN-LAST:event_submitbuttonActionPerformed
 
     /**
      * @param args the command line arguments
