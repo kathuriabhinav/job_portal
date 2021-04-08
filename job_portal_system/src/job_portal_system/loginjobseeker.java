@@ -132,13 +132,13 @@ public class loginjobseeker extends javax.swing.JFrame {
         {    
                 Class.forName(JDBC_DRIVER);
                 conn = DriverManager.getConnection(DB_URL,USER, PASS);
-                stmt = conn.prepareStatement("SELECT email_id,password FROM company WHERE email_id=? and password=?");
+                stmt = conn.prepareStatement("SELECT * FROM jobseeker WHERE email_id=? and password=?");
                 stmt.setString(1,e);
                 stmt.setString(2,p);
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next())
                 {
-                    jobseekerpage a = new jobseekerpage();
+                    jobseekerpage a = new jobseekerpage(e,rs.getInt("percentage"));
                     a.setLocationRelativeTo(null);
                     a.setDefaultCloseOperation(DISPOSE_ON_CLOSE  );
                     a.setVisible(true);

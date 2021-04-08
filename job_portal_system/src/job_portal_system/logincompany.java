@@ -132,13 +132,13 @@ public class logincompany extends javax.swing.JFrame {
         {    
                 Class.forName(JDBC_DRIVER);
                 conn = DriverManager.getConnection(DB_URL,USER, PASS);
-                stmt = conn.prepareStatement("SELECT email_id,password FROM company WHERE email_id=? and password=?");
+                stmt = conn.prepareStatement("SELECT * FROM company WHERE email_id=? and password=?");
                 stmt.setString(1,e);
                 stmt.setString(2,p);
                 ResultSet rs = stmt.executeQuery();
                 if(rs.next())
                 {
-                    companypage a = new companypage();
+                    companypage a = new companypage(e,rs.getInt("percentage"));
                     a.setLocationRelativeTo(null);
                     a.setDefaultCloseOperation(DISPOSE_ON_CLOSE  );
                     a.setVisible(true);

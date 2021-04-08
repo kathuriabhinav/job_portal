@@ -5,16 +5,32 @@
  */
 package job_portal_system;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static job_portal_system.regjobseeker.DB_URL;
+
 /**
  *
  * @author ABHINAV KATHURI
  */
 public class companypage extends javax.swing.JFrame {
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+    static final String DB_URL = "jdbc:mysql://localhost:3306/job_portal_system";
+    static final String USER = "root";
+    static final String PASS = "root";
+    static String email;
+    static int percent;
 
     /**
      * Creates new form companypage
      */
-    public companypage() {
+    public companypage(String e, int p) {
+        email = e;
+        percent = p;
         initComponents();
     }
 
@@ -27,31 +43,107 @@ public class companypage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        show4 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("COMPANY MENU");
+        show4.setText("SHOW");
+        show4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                show4ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("AVAILABLE CANDIDATES LIST");
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Email ID", "Name", "Contact No", "Percentage"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(423, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(481, 481, 481))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(show4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(show4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(338, 338, 338))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void show4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show4ActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        Statement stmt = null;
+        try
+        {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.createStatement();
+            String q,n,e,p,c,pr;
+            q = "select * from jobseeker where percentage>"+percent+"";
+            DefaultTableModel tablemodel = (DefaultTableModel)jTable2.getModel();
+            tablemodel.setRowCount(0);
+            ResultSet rs = stmt.executeQuery(q);
+            int i = 0;
+            while (rs.next()) {
+                e = rs.getString("email_id");
+                n = rs.getString("name");
+                c = rs.getString("contact_no");
+                pr = rs.getString("percentage");
+                tablemodel.addRow(new Object[]{e,n,c,pr});
+                i++;
+            }
+
+            if (i < 1) {
+                JOptionPane.showMessageDialog(null, "No Record Found", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (i == 1) {
+                System.out.println(i + " Record Found");
+            } else {
+                System.out.println(i + " Records Found");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_show4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,12 +175,15 @@ public class companypage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new companypage().setVisible(true);
+                new companypage(email,percent).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JButton show4;
     // End of variables declaration//GEN-END:variables
 }

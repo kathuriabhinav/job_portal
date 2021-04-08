@@ -21,5 +21,4 @@ public class my_main_class {
         m.setDefaultCloseOperation(3);
         m.setVisible(true);
     }
-    
 }

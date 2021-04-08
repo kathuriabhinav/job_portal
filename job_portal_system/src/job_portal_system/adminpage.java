@@ -47,6 +47,10 @@ public class adminpage extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         show1 = new javax.swing.JButton();
         show2 = new javax.swing.JButton();
+        show3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +69,7 @@ public class adminpage extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Email ID", "Password", "Contact No", "Percentage"
+                "Email ID", "Name", "Password", "Contact No", "Percentage"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -85,7 +89,7 @@ public class adminpage extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Email ID", "Password", "Contact No", "Percentage"
+                "Email ID", "Name", "Password", "Contact No", "Percentage"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -103,6 +107,33 @@ public class adminpage extends javax.swing.JFrame {
                 show2ActionPerformed(evt);
             }
         });
+
+        show3.setText("SHOW");
+        show3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                show3ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("RESUME TABLE");
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Company Email ID", "Job Seeker Email ID"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +155,15 @@ public class adminpage extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(251, 251, 251)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(show3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,7 +181,12 @@ public class adminpage extends javax.swing.JFrame {
                     .addComponent(show2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(show3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -227,6 +271,42 @@ public class adminpage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_show2ActionPerformed
 
+    private void show3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show3ActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        Statement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.createStatement();
+            String q,e,p;
+            q = "select * from resume";
+            DefaultTableModel tablemodel = (DefaultTableModel)jTable3.getModel();
+            tablemodel.setRowCount(0);
+            ResultSet rs = stmt.executeQuery(q);
+            int i = 0;
+            while (rs.next()) {
+                e = rs.getString("company_email_id");
+                p = rs.getString("jobseeker_email_id");
+                tablemodel.addRow(new Object[]{e,p});
+                i++;
+            }
+
+            if (i < 1) {
+                JOptionPane.showMessageDialog(null, "No Record Found", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (i == 1) {
+                System.out.println(i + " Record Found");
+            } else {
+                System.out.println(i + " Records Found");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_show3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -265,11 +345,15 @@ public class adminpage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JButton show1;
     private javax.swing.JButton show2;
+    private javax.swing.JButton show3;
     // End of variables declaration//GEN-END:variables
 }
