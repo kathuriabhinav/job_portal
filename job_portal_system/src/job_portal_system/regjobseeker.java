@@ -196,6 +196,7 @@ public class regjobseeker extends javax.swing.JFrame {
 
     private void resumebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumebuttonActionPerformed
         // TODO add your handling code here:
+        displayerrortext.setText(" ");
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         f = chooser.getSelectedFile();

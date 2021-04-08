@@ -171,6 +171,7 @@ public class regcompany extends javax.swing.JFrame {
 
     private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
         // TODO add your handling code here:
+        displayerrortext.setText(" ");
         String name = cname.getText().toString();
         String emailid = cemail.getText().toString();
         String password = cpassword.getText().toString();

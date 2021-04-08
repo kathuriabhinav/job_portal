@@ -5,11 +5,23 @@
  */
 package job_portal_system;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ABHINAV KATHURI
  */
 public class logincompany extends javax.swing.JFrame {
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
+    static final String DB_URL = "jdbc:mysql://localhost:3306/job_portal_system";
+    static final String USER = "root";
+    static final String PASS = "root"; 
 
     /**
      * Creates new form logincompany
@@ -33,6 +45,7 @@ public class logincompany extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cemail = new javax.swing.JTextField();
         cpassword = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +54,11 @@ public class logincompany extends javax.swing.JFrame {
 
         submitbutton.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         submitbutton.setText("Submit");
+        submitbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitbuttonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setText("Company Email ID");
@@ -60,8 +78,11 @@ public class logincompany extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(184, 184, 184)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -90,12 +111,72 @@ public class logincompany extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(92, 92, 92)
-                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
+        // TODO add your handling code here:
+        Connection conn = null;
+        jLabel1.setText(" ");
+        PreparedStatement stmt = null;
+        String e,p;
+        e = cemail.getText().toString();
+        p = cpassword.getText().toString();
+        try
+        {    
+                Class.forName(JDBC_DRIVER);
+                conn = DriverManager.getConnection(DB_URL,USER, PASS);
+                stmt = conn.prepareStatement("SELECT email_id,password FROM company WHERE email_id=? and password=?");
+                stmt.setString(1,e);
+                stmt.setString(2,p);
+                ResultSet rs = stmt.executeQuery();
+                if(rs.next())
+                {
+                    companypage a = new companypage();
+                    a.setLocationRelativeTo(null);
+                    a.setDefaultCloseOperation(DISPOSE_ON_CLOSE  );
+                    a.setVisible(true);
+                }else{
+                    jLabel1.setText("Wrong Credentials");
+                }
+        }
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(logincompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                conn.close();
+            }
+            catch(SQLException se)
+            {
+                se.printStackTrace();
+            }
+            finally 
+            {
+                try
+                    {
+                        if(conn!=null)
+                        conn.close();
+                    }
+                    catch(SQLException se)
+                    {
+                        se.printStackTrace();
+                    }
+            }
+        }
+    }//GEN-LAST:event_submitbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +216,7 @@ public class logincompany extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cemail;
     private javax.swing.JTextField cpassword;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
