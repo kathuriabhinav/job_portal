@@ -5,11 +5,18 @@
  */
 package job_portal_system;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,6 +58,9 @@ public class adminpage extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        update1 = new javax.swing.JButton();
+        update2 = new javax.swing.JButton();
+        update3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,6 +145,27 @@ public class adminpage extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
+        update1.setText("UPDATE SELCTED ROW");
+        update1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update1ActionPerformed(evt);
+            }
+        });
+
+        update2.setText("UPDATE SELCTED ROW");
+        update2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update2ActionPerformed(evt);
+            }
+        });
+
+        update3.setText("UPDATE SELCTED ROW");
+        update3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,28 +173,36 @@ public class adminpage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
+                        .addGap(152, 152, 152)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(show1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(312, 312, 312)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(show2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(show1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(update1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(251, 251, 251)
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46)
+                                .addComponent(show2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(106, 106, 106)
+                                .addComponent(update2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(46, 46, 46)
-                                .addComponent(show3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(show3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)
+                                .addComponent(update3)))))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,21 +211,29 @@ public class adminpage extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(show1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(show1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(update1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(show2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(show2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(update2)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(show3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(show3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(update3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
 
         pack();
@@ -307,6 +354,269 @@ public class adminpage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_show3ActionPerformed
 
+    private void update1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+// get selected row data 
+        String email = model.getValueAt(selectedRowIndex, 0).toString();
+        String name = model.getValueAt(selectedRowIndex, 1).toString();
+        String password = model.getValueAt(selectedRowIndex, 2).toString();
+        String contact = model.getValueAt(selectedRowIndex, 3).toString();
+        String percent = model.getValueAt(selectedRowIndex, 4).toString();
+
+ // get the entered data         
+        String newemail = JOptionPane.showInputDialog(null,"Enter The New Email ID",email);
+        String newname = JOptionPane.showInputDialog(null,"Enter The New Name",name);
+        String newpassword = JOptionPane.showInputDialog(null,"Enter The New password",password);
+        String newcontact = JOptionPane.showInputDialog(null,"Enter The New contact no",contact);
+        String newpercent = JOptionPane.showInputDialog(null,"Enter The New percent",percent);
+        int per = parseInt(newpercent);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("UPDATE jobseeker SET name = ?, email_id = ? , password = ?, contact_no = ? , percentage = ? WHERE email_id = ?");
+            stmt.setString(1,name);
+            stmt.setString(2,newemail);
+            stmt.setString(3,newpassword);
+            stmt.setString(4,newcontact);
+            stmt.setInt(5,per);
+            stmt.setString(6,email);
+            stmt.executeUpdate();
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }
+        
+// set the new data into jtable row
+        model.setValueAt(newemail, selectedRowIndex, 0);
+        model.setValueAt(newname, selectedRowIndex, 1);
+        model.setValueAt(newpassword, selectedRowIndex, 2);
+        model.setValueAt(newcontact, selectedRowIndex,3);
+        model.setValueAt(newpercent, selectedRowIndex,4);
+    }//GEN-LAST:event_update1ActionPerformed
+
+    private void update2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update2ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable2.getSelectedRow();
+        
+// get selected row data 
+        String email = model.getValueAt(selectedRowIndex, 0).toString();
+        String name = model.getValueAt(selectedRowIndex, 1).toString();
+        String password = model.getValueAt(selectedRowIndex, 2).toString();
+        String contact = model.getValueAt(selectedRowIndex, 3).toString();
+        String percent = model.getValueAt(selectedRowIndex, 4).toString();
+
+ // get the entered data         
+        String newemail = JOptionPane.showInputDialog(null,"Enter The New Email ID",email);
+        String newname = JOptionPane.showInputDialog(null,"Enter The New Name",name);
+        String newpassword = JOptionPane.showInputDialog(null,"Enter The New password",password);
+        String newcontact = JOptionPane.showInputDialog(null,"Enter The New contact no",contact);
+        String newpercent = JOptionPane.showInputDialog(null,"Enter The New percent",percent);
+        int per = parseInt(newpercent);
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("UPDATE company SET name = ?, email_id = ? , password = ?, contact_no = ? , percentage = ? WHERE email_id = ?");
+            stmt.setString(1,name);
+            stmt.setString(2,newemail);
+            stmt.setString(3,newpassword);
+            stmt.setString(4,newcontact);
+            stmt.setInt(5,per);
+            stmt.setString(6,email);
+            stmt.executeUpdate();
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }
+        
+// set the new data into jtable row
+        model.setValueAt(newemail, selectedRowIndex, 0);
+        model.setValueAt(newname, selectedRowIndex, 1);
+        model.setValueAt(newpassword, selectedRowIndex, 2);
+        model.setValueAt(newcontact, selectedRowIndex,3);
+        model.setValueAt(newpercent, selectedRowIndex,4);
+    }//GEN-LAST:event_update2ActionPerformed
+
+    private void update3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable3.getSelectedRow();
+        
+// get selected row data 
+        String cemail = model.getValueAt(selectedRowIndex, 0).toString();
+        String jemail = model.getValueAt(selectedRowIndex, 1).toString();
+        
+
+ // get the entered data         
+        String newcemail = JOptionPane.showInputDialog(null,"Enter The New Company Email ID",cemail);
+        String newjemail = JOptionPane.showInputDialog(null,"Enter The New Job seeker Email ID",jemail);
+                
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("UPDATE resume SET company_email_id = ?, jobseeker_email_id = ? WHERE company_email_id = ?,jobseeker_email_id = ?");
+            stmt.setString(1,newcemail);
+            stmt.setString(2,newjemail);
+            stmt.setString(3,cemail);
+            stmt.setString(3,jemail);
+            stmt.executeUpdate();
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }
+        
+// set the new data into jtable row
+        model.setValueAt(newcemail, selectedRowIndex, 0);
+        model.setValueAt(newjemail, selectedRowIndex, 1);
+        
+    }//GEN-LAST:event_update3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,5 +665,8 @@ public class adminpage extends javax.swing.JFrame {
     private javax.swing.JButton show1;
     private javax.swing.JButton show2;
     private javax.swing.JButton show3;
+    private javax.swing.JButton update1;
+    private javax.swing.JButton update2;
+    private javax.swing.JButton update3;
     // End of variables declaration//GEN-END:variables
 }
