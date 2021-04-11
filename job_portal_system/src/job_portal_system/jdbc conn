@@ -3,6 +3,7 @@ mysql -u root -p
 root
 create database job_portal_system;
 use job_portal_system;
+select email_id,name,password,contact_no,percentage from jobseeker;
 
 create table resume(
 company_email_id Varchar(40) not null,
@@ -25,5 +26,44 @@ percentage Int not null,
 resume blob not null);
 
 
+mysql> select email_id,name,password,contact_no,percentage from jobseeker;
++-------------------+---------+----------+------------+------------+
+| email_id          | name    | password | contact_no | percentage |
++-------------------+---------+----------+------------+------------+
+| abhi@gmail.com    | abhi    | 6789     | 0123456789 |         95 |
+| abhinav@gmail.com | abhinav | 1234     | 9640876048 |         74 |
+| harsha@gmail.com  | harsha  | 4123     | 6543210987 |         92 |
+| jayaram@gmail.com | jayaram | 3412     | 7654321098 |         87 |
+| vasanth@gmail.com | vasanth | 2341     | 876543219  |         54 |
++-------------------+---------+----------+------------+------------+
+5 rows in set (0.00 sec)
 
+mysql> select email_id,name,password,contact_no,percentage from company;
++---------------------+-----------+----------+------------+------------+
+| email_id            | name      | password | contact_no | percentage |
++---------------------+-----------+----------+------------+------------+
+| gfg@gmail.com       | gfg       | password | 1325798546 |         60 |
+| google@gmail.com    | google    | 12345678 | 9123487965 |         85 |
+| infosys@gmail.com   | infosys   | abc      | 3497591358 |         50 |
+| microsoft@gmail.com | microsoft | 1234     | 8796541287 |         90 |
+| oracle@gmail.com    | oracle    | 123      | 9874365987 |         75 |
++---------------------+-----------+----------+------------+------------+
+5 rows in set (0.00 sec)
 
+mysql> select company_email_id,jobseeker_email_id from resume;
++---------------------+----------------------+
+| company_email_id    | jobseeker_email_id   |
++---------------------+----------------------+
+| gfg@gmail.com       | abhinav@gmail.com    |
+| infosys@gmail.com   | vasanth@gmail.com    |
+| google@gmail.com    | jayaram@gmail.com    |
+| oracle@gmail.com    | jayaram@gmail.com    |
+| microsoft@gmail.com | harsha@gmail.com     |
+| infosys@gmail.com   | harsha@gmail.com     |
+| gfg@gmail.com       | harsha@gmail.com     |
+| microsoft@gmail.com | abhi@gmail.com       |
+| oracle@gmail.com    | abhi@gmail.com       |
+| infosys@gmail.com   | abhi@gmail.com       |
+| oracle@gmail.com    | hanumandlu@gmail.com |
++---------------------+----------------------+
+11 rows in set (0.00 sec)
