@@ -6,7 +6,7 @@
 package job_portal_system;
 
 /**
- *
+ *  
  * @author ABHINAV KATHURI
  */
 public class my_main_class {

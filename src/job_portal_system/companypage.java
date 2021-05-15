@@ -152,8 +152,9 @@ public class companypage extends javax.swing.JFrame {
             while (rs.next()) {
                 e = rs.getString("email_id");
                 n = rs.getString("name");
+                c = rs.getString("contact_no");
                 pr = rs.getString("percentage");
-                tablemodel.addRow(new Object[]{e,n,pr});
+                tablemodel.addRow(new Object[]{e,n,c,pr});
                 i++;
             }
 

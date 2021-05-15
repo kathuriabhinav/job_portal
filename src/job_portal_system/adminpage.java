@@ -61,6 +61,9 @@ public class adminpage extends javax.swing.JFrame {
         update1 = new javax.swing.JButton();
         update2 = new javax.swing.JButton();
         update3 = new javax.swing.JButton();
+        removejobseekerbutton = new javax.swing.JButton();
+        removecompanybutton = new javax.swing.JButton();
+        removeresumebutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,43 +169,74 @@ public class adminpage extends javax.swing.JFrame {
             }
         });
 
+        removejobseekerbutton.setText("REMOVE SELECTED ROW");
+        removejobseekerbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removejobseekerbuttonActionPerformed(evt);
+            }
+        });
+
+        removecompanybutton.setText("REMOVE SELECTED ROW");
+        removecompanybutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removecompanybuttonActionPerformed(evt);
+            }
+        });
+
+        removeresumebutton.setText("REMOVE SELECTED ROW");
+        removeresumebutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeresumebuttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(show1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(update1)
+                .addGap(45, 45, 45)
+                .addComponent(removejobseekerbutton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 194, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(show1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(update1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(show2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)
-                        .addComponent(update2)))
-                .addGap(179, 179, 179))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(179, 179, 179))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(178, 178, 178))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(258, 258, 258)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(show3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
-                        .addComponent(update3)))
+                .addGap(348, 348, 348)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(321, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(show2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(update2)
+                .addGap(53, 53, 53)
+                .addComponent(removecompanybutton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(show3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(update3)
+                .addGap(31, 31, 31)
+                .addComponent(removeresumebutton)
+                .addGap(226, 226, 226))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,21 +245,24 @@ public class adminpage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(show1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(update1))
-                .addGap(18, 18, 18)
+                    .addComponent(update1)
+                    .addComponent(removejobseekerbutton))
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(show2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(update2))
-                .addGap(18, 18, 18)
+                    .addComponent(update2)
+                    .addComponent(removecompanybutton))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(show3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(update3))
+                    .addComponent(update3)
+                    .addComponent(removeresumebutton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -612,6 +649,322 @@ public class adminpage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_update3ActionPerformed
 
+    private void removejobseekerbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removejobseekerbuttonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+// get selected row data 
+        String email = model.getValueAt(selectedRowIndex, 0).toString();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("delete resume  "
+                    + "from jobseeker "
+                    + "inner join resume "
+                    + "where jobseeker.email_id=resume.jobseeker_email_id and jobseeker.email_id=?");
+            stmt.setString(1,email);
+            stmt.executeUpdate();
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }        
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("delete from jobseeker where jobseeker.email_id=?");
+            stmt.setString(1,email);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this,"Job Seeker removed");
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }        
+    }//GEN-LAST:event_removejobseekerbuttonActionPerformed
+
+    private void removecompanybuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removecompanybuttonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable2.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable2.getSelectedRow();
+        
+// get selected row data 
+        String email = model.getValueAt(selectedRowIndex, 0).toString();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("delete resume  "
+                    + "from company "
+                    + "inner join resume "
+                    + "where company.email_id=resume.company_email_id and company.email_id=?");
+            stmt.setString(1,email);
+            stmt.executeUpdate();
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }        
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("delete from company where company.email_id=?");
+            stmt.setString(1,email);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this,"company removed");
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }        
+    }//GEN-LAST:event_removecompanybuttonActionPerformed
+
+    private void removeresumebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeresumebuttonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+        
+// get selected row index
+        int selectedRowIndex = jTable3.getSelectedRow();
+        
+// get selected row data 
+        String cemail = model.getValueAt(selectedRowIndex, 0).toString();
+        String jemail = model.getValueAt(selectedRowIndex, 1).toString();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try
+        {             
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER, PASS);
+            stmt = conn.prepareStatement("delete  from resume where resume.company_email_id = ? and resume.jobseeker_email_id=?");
+            stmt.setString(1,cemail);
+            stmt.setString(2,jemail);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(this,"resume connection between selected jobseeker and company removed");
+
+        }
+        
+        catch (SQLIntegrityConstraintViolationException se)
+        {
+        	se.printStackTrace();
+        }
+        
+        catch(SQLException se)
+        {
+            se.printStackTrace();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+        finally
+        {
+            try
+            {
+                if(stmt!=null)
+                {
+                	conn.close();
+                }
+            }
+            catch(SQLException se)
+            {
+            	se.printStackTrace();
+            }
+            finally {
+            	try
+                {
+                    if(conn!=null)
+                    {
+                    	conn.close();
+                    }
+                    
+                }
+                catch(SQLException se)
+                {
+                   se.printStackTrace();
+                }
+            }
+        }        
+    }//GEN-LAST:event_removeresumebuttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -657,6 +1010,9 @@ public class adminpage extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JButton removecompanybutton;
+    private javax.swing.JButton removejobseekerbutton;
+    private javax.swing.JButton removeresumebutton;
     private javax.swing.JButton show1;
     private javax.swing.JButton show2;
     private javax.swing.JButton show3;
