@@ -1,9 +1,5 @@
 # job_portal
-A java swing project for a job portal system 
-where 
-companies and jobseekers can register themselves
-jobseekers can upload resumes, and their percentage
-companies can upload their minimum required percentage 
-job seekers can update their resumes at any time, and any number of times
-jobseekers can send resumes to companies
-comapnies can view the sent resumes
+A Java Swing GUI based project built using Netbeans IDE on the concepts of Database Management System
+using MySQL.
+• It enables job-seekers to post their resume, search for jobs, view personal job listings. It enables companies to register and search for candidate resumes.
+• Apart from there is an admin module to make changes to the database content.
