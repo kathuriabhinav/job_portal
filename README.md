@@ -2,6 +2,16 @@
 A Java Swing GUI based project built using Netbeans IDE on the concepts of Database Management System
 using MySQL.
 
-• It enables job-seekers to post their resume, search for jobs, view personal job listings. It enables companies to register and search for candidate resumes.
+• It enables job-seekers to 
+    - register themselves, 
+    - post their resume, 
+    - update their resume, 
+    - search for jobs that he/she is eligible for, 
+    - view personal job listings. 
 
-• Apart from there is an admin module to make changes to the database content.
+• It enables companies to 
+    - register themselves, 
+    - search for eligible candidates, 
+    - view resume of a particular candidate. 
+
+• Apart from there is an admin module to view and make changes to the database content. 
